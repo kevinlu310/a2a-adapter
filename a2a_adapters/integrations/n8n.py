@@ -61,46 +61,45 @@ class N8nAgentAdapter(BaseAgentAdapter):
 
     async def to_framework(self, params: MessageSendParams) -> Dict[str, Any]:
         """
-        Convert A2A message parameters to n8n webhook payload format.
-        
-        Extracts the user's message text and constructs a JSON payload
-        suitable for posting to an n8n webhook.
-        
+        Build the n8n webhook payload from A2A params.
+
+        Extracts the latest user message text (supports string or list of content
+        blocks, ignores empty parts, preserves order) and constructs a JSON-serializable
+        payload for posting to an n8n webhook.
+
         Args:
-            params: A2A message parameters
-            
+            params: A2A message parameters.
+
         Returns:
-            Dictionary with 'message' and optional 'metadata' keys
+            dict with keys:
+              - "message": str — the extracted user text
+              - "metadata": dict — optional session/context info
         """
-        # Extract text from the last user message
-        def _extract_text(msg) -> str:
-            if not hasattr(msg, "content"):
-                return ""
-            c = msg.content
-            if isinstance(c, str):
-                 return c.strip()
-            if isinstance(c, list):
-                 parts: list[str] = []
-                 for it in c:
-                    t = getattr(it, "text", "")
-                    t = (t or "").strip()
-                    if t:
-                        parts.append(t)
-                 return " ".join(parts)
-
-             return ""
-
         user_message = ""
-        if params.messages:
-            user_message = _extract_text(params.messages[-1])
 
-        return {
+        if params.messages:
+            last = params.messages[-1]
+            content = getattr(last, "content", "")
+            if isinstance(content, str):
+                user_message = content.strip()
+            elif isinstance(content, list):
+                text_parts: list[str] = []
+                for item in content:
+                    # Common A2A TextPart objects have "text"
+                    txt = getattr(item, "text", None)
+                    if txt and isinstance(txt, str) and txt.strip():
+                        text_parts.append(txt)
+                user_message = self._smart_join(text_parts)
+
+        payload: Dict[str, Any] = {
             "message": user_message,
             "metadata": {
                 "session_id": getattr(params, "session_id", None),
                 "context": getattr(params, "context", None),
             },
         }
+        return payload
+
 
     async def call_framework(
          self, framework_input: Dict[str, Any], params: MessageSendParams
