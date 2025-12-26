@@ -113,8 +113,8 @@ class N8nAgentAdapter(BaseAgentAdapter):
         """
         if not parts:
             return ""
-        text = " ".join(p for p in parts if p)
-        return " ".join(p.strip() for p in parts if p).strip()
+        text = " ".join(p.strip() for p in parts if p)
+        return text.strip()
 
     # ---------- Framework call ----------
 
