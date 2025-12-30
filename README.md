@@ -1,7 +1,7 @@
 # A2A Adapter
 
 [![PyPI version](https://badge.fury.io/py/a2a-adapter.svg)](https://badge.fury.io/py/a2a-adapter)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -12,13 +12,13 @@ A Python SDK that enables seamless integration of various agent frameworks (n8n,
 **✨ Key Benefits:**
 
 - 🔌 **3-line setup** - Expose any agent as A2A-compliant
-- 🌐 **Framework agnostic** - Works with n8n, CrewAI, LangChain, and custom agents
+- 🌐 **Framework agnostic** - Works with n8n, CrewAI, LangChain, and more
 - 🌊 **Streaming support** - Built-in streaming for real-time responses
 - 🎯 **Production ready** - Type-safe, well-tested, and actively maintained
 
 ## Features
 
-✨ **Framework Agnostic**: Integrate n8n workflows, CrewAI crews, LangChain chains, or custom agents
+✨ **Framework Agnostic**: Integrate n8n workflows, CrewAI crews, LangChain chains, and more
 🔌 **Simple API**: 3-line setup to expose any agent as A2A-compliant
 🌊 **Streaming Support**: Built-in streaming for LangChain and custom adapters
 🎯 **Type Safe**: Leverages official A2A SDK types
@@ -484,7 +484,7 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+Apache-2.0 License - see [LICENSE](LICENSE) file for details.
 
 ## Credits
 
@@ -503,7 +503,7 @@ Powered by the [A2A Protocol](https://github.com/a2a-protocol/a2a-protocol)
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
